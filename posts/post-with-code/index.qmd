@@ -6,8 +6,20 @@ categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
-This is a post with executable code.
+## Librairie olympicsWeather
+
+Introduction de présentation du package ici
+
+Comment l'installer : Si ce n'est pas déjà fait, installer le package remotes en rentrant dans la console :
 
 ```{r}
-1 + 1
+#| eval: FALSE
+install.packages("remotes")
+```
+
+Ensuite il ne reste plus qu'à utliser cette commande dans la console :
+
+```{r}
+#| eval: FALSE
+remotes::install_github("simdups/olympicsWeather")
 ```
