@@ -1,0 +1,231 @@
+---
+title: "Exercice 1"
+author: "Simon Dupas-Brousse"
+date: "2024-02-27"
+categories: [news, code, analysis]
+eval: false
+---
+
+importation :
+
+```{r}
+path = ("data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv")
+data_ex = read.table(path, header = TRUE, sep = ";", quote = "\"")
+```
+
+1.  Créez un script .R intitulé exercice.R.
+
+Désolé mais les quartos c'est mieux. Il faudrait faire ça : usethis::use_r("exercice")
+
+2.  Lisez le fichier exo_1_ex.txt avec la fonction read.table. Le résultat sera affecté à l'objet de nom data_ex. Le jeux de données contient 4 colonnes. Quels sont les noms et la nature des colonnes ? Combien de lignes contient la data.frame ?
+
+```{r}
+str(data_ex)
+```
+
+31 obs
+
+3.  Combien y a t'il de sites olympiques ?
+
+```{r}
+sum(grepl("Site olympique", data_ex$sites_olympiques_paralympiques, ignore.case = TRUE))
+```
+
+26 olympiques
+
+4.  Combien y a t'il de sites paralympiques ?
+
+```{r}
+sum(grepl("Site paralympique", data_ex$sites_olympiques_paralympiques, ignore.case = TRUE))
+```
+
+19 paralympiques
+
+5.  Quels sont les sites qui accueillent plusieurs disciplines sportives ?
+
+j'ai juste compté les lignes qui présentent au moins une virgule dans la colonne "sports" :
+
+```{r}
+library(stringr)
+sites_multisports = subset(data_ex, str_count(sports, ",") > 0)
+sites_multisports$nom
+```
+
+6.  Quels sont les disciplines para-olympiques accueillies dans ces sites franciliens ?
+
+Donc parmi les 19 sites qui accueillent plusieurs disciplines, il faut trouver celles qui sont para-olympiques.
+
+Je suis allé chercher la liste sur <https://www.paris2024.org/fr/sports-paralympiques/>
+
+On obtient ça : Basket fauteuil, **boccia**, **cécifoot**, escrime fauteuil goalball, para athlétisme, para aviron, para badminton, para canoë, para cyclisme sur route, para cyclisme sur piste, para équitation (dressage), para haltérophilie, para judo, para natation, para taekwondo, para tennis de table, para tir à l'arc, para tir sportif, para triathlon, rugby fauteuil, tennis fauteuil, volleyball assis
+
+Pour que ça soit plus léger dans le code j'ai utilisé des mots clés tels que para, fauteuil ou assis. Puis j'ai écris les derniers en entier (ceux surlignés).
+
+```{r}
+sites_para_olympiques <- subset(
+  sites_multisports,
+  grepl("fauteuil|Para|assis|Goalball|Cécifoot", sports, ignore.case = TRUE)
+)
+```
+
+7.  Quel(s) site(s) accueille(nt) le plus de disciplines différentes ?
+
+Comme dans chaque site les disciplines sont tout le temps différentes, on peut se contenter de compter le(s) site(s) avec le plus de virgules. (ou alors j'ai mal compris la question)
+
+```{r}
+nb_disciplines <- str_count(data_ex$sports, ",")
+
+# nombre de virgule maximum dans un site
+max_nb_virgules <- max(nb_disciplines)
+
+# tous les sites avec l'indice maximum de virgules
+indices_max <- which(nb_disciplines == max_nb_virgules)
+
+# affichage de leur nom
+data_ex$nom[indices_max]
+
+```
+
+8.  Quelle discipline aura lieu sur le plus grand nombre de sites ? Quels sont ces sites ?
+
+Dans un premier temps, il faut découper correctement les disciplines pour ensuite les compter :
+
+```{r}
+sports_separes <- unlist(strsplit(data_ex$sports, ","))
+comptage_disciplines <- table(sports_separes)
+```
+
+Maintenant, on peut identifier la ou les discipline(s) apparue(s) un maximum :
+
+```{r}
+indices2_max <- which(comptage_disciplines == max(comptage_disciplines))
+names(comptage_disciplines[indices2_max])
+```
+
+Pour finir, on affiche les noms des sites qui présentent la discipline "Athlétisme" :
+
+```{r}
+sites_athletisme <- grep("Athlétisme", data_ex$sports)
+data_ex$nom[sites_athletisme]
+```
+
+9.  A vol d'oiseau, quels sont les sites les deux sites les plus proches ?
+
+Dans un premier temps, il faut que les coordonnées soient fournies sous forme de vecteur numérique avec deux éléments (la latitude et la longitude) pour que distHaversine fonctionne. Petit exemple avec les 2 premières lignes du dataset :
+
+```{r}
+library(geosphere)
+
+exemple = data_ex$geo_point[[1]]
+ex2 = data_ex$geo_point[[2]]
+
+la = as.numeric(unlist(strsplit(exemple, ",")))
+la2 = as.numeric(unlist(strsplit(ex2, ",")))
+
+distHaversine(la, la2)
+```
+
+On va se faire une petite fonction qui fait ça pour nous quand on rentre juste data_ex\$geo_point\[\[1\]\] (par exemple) en paramètre :
+
+```{r}
+distance_entre_points <- function(coord1, coord2) {
+  coord1 <- as.numeric(strsplit(coord1, ",")[[1]])
+  coord2 <- as.numeric(strsplit(coord2, ",")[[1]])
+  distHaversine(coord1, coord2)
+}
+# exemple d'utilisation :
+distance_entre_points(data_ex$geo_point[[3]],data_ex$geo_point[[4]])
+```
+
+Maintenant l'idée c'est de calculer automatiquement le distance entre tous les sites du dataset à l'aide d'une boucle. On stocke les résultats de cette boucle dans une matrice "distances" :
+
+```{r}
+distances <- matrix(NA, nrow = nrow(data_ex), ncol = nrow(data_ex))
+for (i in 1:nrow(data_ex)) {
+  for (j in 1:nrow(data_ex)) {
+    distances[i, j] <- distance_entre_points(data_ex[i, "geo_point"], data_ex[j, "geo_point"])
+  }
+}
+
+# On fait juste gaffe à virer les distances d'un site à lui même
+diag(distances) <- NA
+```
+
+Maintenant on peut répondre à la question :
+
+```{r}
+dist_min <- which(distances == min(distances, na.rm = TRUE), arr.ind = TRUE)
+
+data_ex$nom[dist_min[,1]]
+```
+
+bonus si on veut savoir la distance :
+
+```{r}
+# on cherche la ligne des 2 sites :
+which(data_ex$nom == "Stade BMX de Saint-Quentin-en-Yvelines")
+which(data_ex$nom == "Vélodrome National de Saint-Quentin-en-Yvelines")
+
+# on utilise notre fonction :
+distance_entre_points(data_ex$geo_point[[20]],data_ex$geo_point[[4]])
+```
+
+10. Quels sont les deux sites les plus éloignés ?
+
+Plus qu'à faire l'inverse d'avant :
+
+```{r}
+dist_max <- which(distances == max(distances, na.rm = TRUE), arr.ind = TRUE)
+
+data_ex$nom[dist_max[,1]]
+```
+
+bonus si on veut savoir la distance :
+
+```{r}
+# on cherche la ligne des 2 sites :
+which(data_ex$nom == "Colline d'Elancourt")
+which(data_ex$nom == "Stade nautique")
+
+# on utilise notre fonction :
+distance_entre_points(data_ex$geo_point[[28]],data_ex$geo_point[[17]])
+```
+
+11. Vous êtes un heureux millionaire et souhaitez investir dans un bien immobilier. Vous décidez d'acheter un appartement situé au barycentre de l'ensemble des sites olympiques. Où se situe cet appartement ?
+
+Comment calculer un barycentre pour les nuls (pour moi en somme) :
+
+En pratique, cela signifie que nous additionnons toutes les latitudes et toutes les longitudes de tous les sites, puis nous divisons par le nombre total de sites pour trouver les coordonnées moyennes, qui représentent le barycentre de tous les sites.
+
+ok ça part :
+
+```{r}
+# on fait une matrice avec les coord exploitables
+coordonnees <- sapply(data_ex$geo_point, function(x) as.numeric(strsplit(x, ",")[[1]]))
+# puis on fait la moyenne de lat et long de cette matrice :
+c(mean(coordonnees[1, ]), mean(coordonnees[2, ]))
+```
+
+Maintenant on va utiliser reverse_geocode pour identifier le nom d'une adresse à partir d'une localisation :
+
+```{r}
+library(tidygeocoder)
+library(tibble)
+library(dplyr, warn.conflicts = FALSE)
+
+tibble(
+    latitude = c(48.8668),
+    longitude = c(2.29757)
+  ) %>%
+  reverse_geocode(
+    lat = latitude,
+    long = longitude,
+    method = 'osm',
+    full_results = TRUE
+  )%>%
+  select(address)
+```
+
+j'ai clairement copié collé l'exemple mais bon ça fonctionne. Voilà l'appart du prochain millionaire : 23, Avenue Pierre 1er de Serbie, Quartier de Chaillot, Paris 16e Arrondissement
+
+à côté de la tour eiffel sympa.

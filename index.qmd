@@ -9,12 +9,7 @@ listing:
   filter-ui: false
 page-layout: full
 title-block-banner: true
+theme: darkly
 ---
 
-1\. Créez un nouveau projet sous RStudio, que vous appelerez my_blog. Ce projet sera créé en utilisant le template quarto blog. Cochez les options renv et git pour les utiliser. Décrivez la structure du projet.
-
-Il y a 2 .qmd (l'index et about), un dossier "posts" pour de potentiels posts j'imagine, un .yml que je n'ai jamais rencontrer je pense, un .css qui est pour du dev web si je dis pas de bétises, le reste c'est du classique.
-
-2\. Personnalisez les documents index.qmd et about.qmd a minima. De la même manière, modifiez le post posts/welcome/index.qmd.
-
-
+Retrouver tous mes posts juste en dessous !

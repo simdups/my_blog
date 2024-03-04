@@ -1,0 +1,138 @@
+---
+title: "Exercice 2"
+author: "Simon Dupas-Brousse"
+date: "2024-03-01"
+categories: [news, code, analysis]
+eval: false
+---
+
+Je préviens tout de suite que je n'ai pas continué au-delà de la question 6. Honnêtement, c'est beaucoup trop dur avec le peu d'entraînement qu'on a. J'ai préféré investir mon temps sur GitHub :)
+
+```{r}
+library(rvest)
+library(purrr)
+```
+
+1. Lancez la commande suivante :
+
+```{r}
+list_tables <-
+session("https://fr.wikipedia.org/wiki/Liste_des_m%C3%A9daill%C3%A9s_olympiques") |>
+html_elements(".wikitable") |>
+html_table()
+```
+
+On a charger des tables sous forme de listes
+
+2. Nous allons tout d’abord nous intéresser à la première table.
+Créez un objet intitulé data_medailles_sport_ete contenant le premier élément de list_tables. La table n’est pas bien formattée. Supprimez la première colonne, les noms de colonnes et la première ligne. Renommez les colonnes en c("Discipline", "Annees", "Editions", "Epreuves_2020", "Or", "Argent", "Bronze", "Total", "Athletes_medailles",
+"Athletes_or"). Les colonnes Editions, Epreuves_2020, Or, Argent, Bronze, Total seront converties en colonnes d’entiers.
+
+```{r}
+# Créez un objet intitulé data_medailles_sport_ete contenant le premier élément de list_tables. 
+data_medailles_sport_ete <- list_tables[[1]]
+
+# Supprimer la première colonne et ligne
+data_medailles_sport_ete <- data_medailles_sport_ete[-1, -1,]
+
+# Renommer les colonnes (list noms)
+nouveaux_noms <- c("Discipline", "Annees", "Editions", "Epreuves_2020", 
+                   "Or", "Argent", "Bronze", "Total", "Athletes_medailles", 
+                   "Athletes_or")
+
+# Renommer les colonnes
+colnames(data_medailles_sport_ete) <- nouveaux_noms
+
+# Convertion en entier
+library(dplyr)
+
+cols_to_convert <- c("Editions", "Epreuves_2020", "Or", "Argent", "Bronze", "Total")
+
+data_medailles_sport_ete <- mutate_at(data_medailles_sport_ete, vars(cols_to_convert), as.integer)
+
+summary(data_medailles_sport_ete)
+
+```
+
+3. Quelles sont les 3 disciplines avec le plus de médailles distribuées depuis le début de l’histoire des jeux olympiques ?
+
+```{r}
+data_medailles_sport_ete %>% 
+  arrange(desc(Total)) %>%  # Trie par ordre décroissant de la colonne "Total"
+  head(3)
+```
+
+4. Quelles sont les 3 disciplines avec le moins d’épreuves en 2020 ?
+
+```{r}
+data_medailles_sport_ete %>% 
+  arrange(Epreuves_2020) %>%
+  head(10)
+```
+Il y en a 8.
+
+5. La colonne Editions nous renseigne sur le nombre total d’apparence des disciplines
+aux JO d’été. Nous souhaitons vérifier ce calcul en implémentant notre propre fonction
+calcul_nb_editions_int. Dans un premier temps, la fonction calcul_nb_editions
+prendra en entrée un paramètre depuis, de type entier, qui représente depuis quelle
+année la discipline est au programme.
+
+Si je comprends bien, on doit faire une fonction qui doit compter le nombre de fois qu'une discipline (une ligne donc) a eu lieu aux JOs en se servant de la colonne Annees.
+
+d'abord on sépare par des virgules. puis ifelse pour gérer les 3 situations possibles et extraire les dates. ensuite setdiff
+```{r}
+library(stringr)
+x= "1896, 1900,1908–1924,depuis 1932"
+r = str_split(x,",", simplify = TRUE)
+
+r[1, 1]
+
+as.integer(r[1, 2])
+
+
+# le + permet d'extraire les chiffres qui sont ensembles
+str_extract_all(r[1, 3],"\\d+")
+# on peut aussi faire ça :
+a = sapply(str_split(r[1, 3],"-"), as.integer)
+
+seq(a[1], a[2], 4)
+seq(1896, 1896, 4)
+setdiff()
+```
+
+
+Pour me simplifier la tâche, j'extraie la première occurrence de quatre chiffres dans Annee :
+```{r}
+annee_apparition = regmatches(data_medailles_sport_ete$Annees, regexpr("\\b\\d{4}\\b", data_medailles_sport_ete$Annees))
+annee_apparition
+```
+
+Ensuite on peut faire la fonction :
+
+```{r}
+calcul_nb_editions <- function(depuis) {
+  
+  nb_editions <- numeric(length(annee_apparition))
+  # pour etre sur que c'est un num
+  depuis <- as.numeric(depuis)
+  
+  # Pour chaque discipline
+  for (i in seq_along(annee_apparition)) {
+    # Récupère l'année d'apparition de la discipline
+    annee <- as.numeric(annee_apparition[[i]])
+    
+    # Si 'depuis' est supérieur ou égal à l'année d'apparition
+    if (depuis >= annee) {
+      nb_editions[i] <- (2020 - depuis) / 4 + 1
+    } else {
+      nb_editions[i] <- (2020 - annee) / 4 + 1
+    }
+  }
+  return(nb_editions)
+}
+
+calcul_nb_editions(1800)
+```
+
+Elle fonctionne à quelques détails près comme le fait qu'il y a eu des interruptions.
+(oui du coup elle ne fonctionne pas vraiment :/ )

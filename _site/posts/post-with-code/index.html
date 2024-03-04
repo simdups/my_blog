@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Harlow Malloc">
-<meta name="dcterms.date" content="2024-02-28">
+<meta name="author" content="Simon Dupas-Brousse">
+<meta name="dcterms.date" content="2024-03-03">
 
-<title>my_blog - Post With Code</title>
+<title>my_blog - Utilisation Package olympicsWeather</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+ <span class="menu-text">à propos</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Post With Code</h1>
+      <h1 class="title">Utilisation Package olympicsWeather</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">news</div>
                 <div class="quarto-category">code</div>
@@ -157,14 +157,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Harlow Malloc </p>
+               <p>Simon Dupas-Brousse </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 28, 2024</p>
+        <p class="date">March 3, 2024</p>
       </div>
     </div>
     
@@ -182,15 +182,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>This is a post with executable code.</p>
+<section id="librairie-olympicsweather" class="level2">
+<h2 class="anchored" data-anchor-id="librairie-olympicsweather">Librairie olympicsWeather</h2>
+<p>Ce package permet d’obtenir les prévisions météorologiques horaires pour les sept jours à venir du lieu choisi par l’utilisateur grâce à sa fonction “get_forecast”.</p>
+<p>Comment l’installer ?</p>
+<p>Si ce n’est pas déjà fait, installer le package remotes en rentrant dans la console :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Ensuite il faut utiliser cette commande dans la console :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"simdups/olympicsWeather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Et voilà ! Il ne reste plus qu’à utiliser la fonction “get_forecast” pour le lieu de votre choix :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olympicsWeather)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>météo_nantes <span class="ot">=</span> <span class="fu">get_forecast</span>(<span class="st">"Nantes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vous devriez obtenir une table comme celle-ci :</p>
+<p><img src="meteo_ex.png" class="img-fluid"></p>
+</section>
+<section id="exemples-dutilisation" class="level2">
+<h2 class="anchored" data-anchor-id="exemples-dutilisation">Exemples d’utilisation</h2>
+<section id="stade-de-france" class="level3">
+<h3 class="anchored" data-anchor-id="stade-de-france">Stade de France</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_forecast</span>(<span class="st">"stade de France"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tahiti" class="level3">
+<h3 class="anchored" data-anchor-id="tahiti">Tahiti</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_forecast</span>(<span class="st">"Tahiti"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="des-coordonnées-43.276703-5.334791" class="level3">
+<h3 class="anchored" data-anchor-id="des-coordonnées-43.276703-5.334791">Des coordonnées : 43.276703, 5.334791</h3>
+<p>Pour cet exemple, les coordonnées doivent être transformées en vecteur au préalable.</p>
+<ul>
+<li>Soit en créant un objet (ici je crée “coord”) :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coord <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">43.276703</span>, <span class="fl">5.334791</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_forecast</span>(coord)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Soit en rentrant directement le contenu de l’objet en argument :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_forecast</span>(<span class="fu">c</span>(<span class="fl">43.276703</span>, <span class="fl">5.334791</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

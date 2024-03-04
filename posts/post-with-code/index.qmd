@@ -1,25 +1,74 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
-date: "2024-02-28"
+title: "Utilisation Package olympicsWeather"
+author: "Simon Dupas-Brousse"
+date: "2024-03-03"
 categories: [news, code, analysis]
-image: "image.jpg"
+image: "soleil.png"
 ---
 
 ## Librairie olympicsWeather
 
-Introduction de présentation du package ici
+Ce package permet d'obtenir les prévisions météorologiques horaires pour les sept jours à venir du lieu choisi par l'utilisateur grâce à sa fonction "get_forecast".
 
-Comment l'installer : Si ce n'est pas déjà fait, installer le package remotes en rentrant dans la console :
+Comment l'installer ?
+
+Si ce n'est pas déjà fait, installer le package remotes en rentrant dans la console :
 
 ```{r}
 #| eval: FALSE
 install.packages("remotes")
 ```
 
-Ensuite il ne reste plus qu'à utliser cette commande dans la console :
+Ensuite il faut utiliser cette commande dans la console :
 
 ```{r}
 #| eval: FALSE
 remotes::install_github("simdups/olympicsWeather")
+```
+
+Et voilà ! Il ne reste plus qu'à utiliser la fonction "get_forecast" pour le lieu de votre choix :
+
+```{r}
+#| eval: FALSE
+library(olympicsWeather)
+météo_nantes = get_forecast("Nantes")
+```
+
+Vous devriez obtenir une table comme celle-ci :
+
+![](meteo_ex.png)
+
+## Exemples d'utilisation
+
+### Stade de France
+
+```{r}
+#| eval: FALSE
+get_forecast("stade de France")
+```
+
+### Tahiti
+
+```{r}
+#| eval: FALSE
+get_forecast("Tahiti")
+```
+
+### Des coordonnées : 43.276703, 5.334791
+
+Pour cet exemple, les coordonnées doivent être transformées en vecteur au préalable.
+
+-   Soit en créant un objet (ici je crée "coord") :
+
+```{r}
+#| eval: FALSE
+coord = c(43.276703, 5.334791)
+get_forecast(coord)
+```
+
+-   Soit en rentrant directement le contenu de l'objet en argument :
+
+```{r}
+#| eval: FALSE
+get_forecast(c(43.276703, 5.334791))
 ```

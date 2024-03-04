@@ -1,12 +1,10 @@
 ---
 title: "Welcome To My Blog"
-author: "Tristan O'Malley"
+author: "Simon Dupas-Brousse"
 date: "2024-02-25"
 categories: [news]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+Bienvenue sur mon blog ! Ici, je partage mes réflexions et mes expériences sur divers sujets. Je publie régulièrement (c'est faux) des articles sur la météo (encore un mensonge), et j'espère que vous trouverez mes billets intéressants et utiles. N'hésitez pas à laisser des commentaires et à partager vos propres expériences. Je suis toujours ravi de discuter avec mes (nombreux) lecteurs !
 
-![](thumbnail.jpg)
-
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+![](blog.png)

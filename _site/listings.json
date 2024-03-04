@@ -3,6 +3,9 @@
     "listing": "/index.html",
     "items": [
       "/posts/post-with-code/index.html",
+      "/posts/exercice_3/index.html",
+      "/posts/exercice_2/index.html",
+      "/posts/exercice_1/index.html",
       "/posts/welcome/index.html"
     ]
   }
