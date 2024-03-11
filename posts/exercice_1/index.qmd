@@ -5,7 +5,7 @@ date: "2024-02-27"
 categories: [news, code, analysis]
 ---
 
-importation :
+Importation :
 
 ```{r}
 path = ("~/M1/S2/R avancé/my_blog/data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv")
