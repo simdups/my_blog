@@ -3,7 +3,6 @@ title: "Exercice 3"
 author: "Simon Dupas-Brousse"
 date: "2024-03-02"
 categories: [news, code, analysis]
-eval: false
 ---
 
 1.  Listez les fichiers présents dans le dossier data. Quelles sont les extensions des différents fichiers ?
@@ -18,7 +17,7 @@ list.files("data/")
 
 ```{r}
 library(arrow)
-tokyo = read_parquet("data/tokyo_athletes.parquet")
+tokyo = read_parquet("~/M1/S2/R avancé/my_blog/data/tokyo_athletes.parquet")
 str(tokyo)
 ```
 
@@ -26,7 +25,7 @@ str(tokyo)
 
 ```{r}
 library(jsonlite)
-olympics = read_json("data/olympics_athletes.json")
+olympics = read_json("~/M1/S2/R avancé/my_blog/data/olympics_athletes.json")
 length(olympics)
 ```
 
@@ -41,7 +40,7 @@ Chaque liste contient des données propres à un athlète. Donc on a des infos (
 On va le convertir en df pour la suite :
 
 ```{r}
-olymp = fromJSON("data/olympics_athletes.json")
+olymp = fromJSON("~/M1/S2/R avancé/my_blog/data/olympics_athletes.json")
 str(olymp)
 ```
 
@@ -49,7 +48,7 @@ str(olymp)
 
 ```{r}
 library(RSQLite)
-con <- dbConnect(SQLite(), dbname = "data/data.sqlite")
+con <- dbConnect(SQLite(), dbname = "~/M1/S2/R avancé/my_blog/data/data.sqlite")
 dbListTables(con)
 ```
 
@@ -60,9 +59,9 @@ Je me suis rendu compte que dbWriteTable ne prend que des data.frame en "value".
 ```{r}
 tokyo_df <- as.data.frame(tokyo)
 str(tokyo_df)
-
-dbWriteTable(con,"tokyo_athletes", tokyo_df)
-dbWriteTable(con,"olympics_athletes", olymp)
+# comme je l'ai déjà fait je mets les commandes en commentaire
+# dbWriteTable(con,"tokyo_athletes", tokyo_df)
+# dbWriteTable(con,"olympics_athletes", olymp)
 ```
 
 6.  Inspectez la table olympics_athletes en utilisant la fonction dbListFields. Quelles sont les colonnes de la table ?

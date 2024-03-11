@@ -187,181 +187,400 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"data/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
 </div>
 <p>.sqlite .json .parquet</p>
 <ol start="2" type="1">
 <li>Lisez le fichier .parquet en utilisant la librairie arrow. Quelles sont les dimensions de la table ? Quelles sont les colonnes présentes ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tokyo <span class="ot">=</span> <span class="fu">read_parquet</span>(<span class="st">"data/tokyo_athletes.parquet"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tokyo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : 'arrow'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>L'objet suivant est masqué depuis 'package:utils':
+
+    timestamp</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tokyo <span class="ot">=</span> <span class="fu">read_parquet</span>(<span class="st">"~/M1/S2/R avancé/my_blog/data/tokyo_athletes.parquet"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tokyo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   11085 obs. of  3 variables:
+ $ Name      : chr  "AALERUD Katrine" "ABAD Nestor" "ABAGNALE Giovanni" "ABALDE Alberto" ...
+ $ NOC       : chr  "Norway" "Spain" "Italy" "Spain" ...
+ $ Discipline: chr  "Cycling Road" "Artistic Gymnastics" "Rowing" "Basketball" ...</code></pre>
+</div>
 </div>
 <ol start="3" type="1">
 <li>Lisez le fichier .json en utilisant la librairie jsonlite. Quelles sont les dimensions de la table ? Quelles sont les colonnes présentes ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>olympics <span class="ot">=</span> <span class="fu">read_json</span>(<span class="st">"data/olympics_athletes.json"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(olympics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'jsonlite' a été compilé avec la version R 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>olympics <span class="ot">=</span> <span class="fu">read_json</span>(<span class="st">"~/M1/S2/R avancé/my_blog/data/olympics_athletes.json"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(olympics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 269731</code></pre>
+</div>
 </div>
 <p>C’est une liste qui contient 269731 listes. Comme le montre cet exemple :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>olympics[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>olympics[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[[1]]$ID
+[1] 1
+
+[[1]]$Name
+[1] "A Dijiang"
+
+[[1]]$Sex
+[1] "M"
+
+[[1]]$Age
+[1] 24
+
+[[1]]$Height
+[1] 180
+
+[[1]]$Weight
+[1] 80
+
+[[1]]$Team
+[1] "China"
+
+[[1]]$NOC
+[1] "CHN"
+
+[[1]]$Games
+[1] "1992 Summer"
+
+[[1]]$City
+[1] "Barcelona"
+
+[[1]]$Sport
+[1] "Basketball"
+
+[[1]]$Event
+[1] "Basketball Men's Basketball"</code></pre>
+</div>
 </div>
 <p>Chaque liste contient des données propres à un athlète. Donc on a des infos (ID, nom, …) sur 269731 athlètes.</p>
 <p>On va le convertir en df pour la suite :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>olymp <span class="ot">=</span> <span class="fu">fromJSON</span>(<span class="st">"data/olympics_athletes.json"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(olymp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>olymp <span class="ot">=</span> <span class="fu">fromJSON</span>(<span class="st">"~/M1/S2/R avancé/my_blog/data/olympics_athletes.json"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(olymp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   269731 obs. of  13 variables:
+ $ ID    : int  1 2 3 4 5 5 5 5 5 5 ...
+ $ Name  : chr  "A Dijiang" "A Lamusi" "Gunnar Nielsen Aaby" "Edgar Lindenau Aabye" ...
+ $ Sex   : chr  "M" "M" "M" "M" ...
+ $ Age   : int  24 23 24 34 21 21 25 25 27 27 ...
+ $ Height: int  180 170 NA NA 185 185 185 185 185 185 ...
+ $ Weight: num  80 60 NA NA 82 82 82 82 82 82 ...
+ $ Team  : chr  "China" "China" "Denmark" "Denmark/Sweden" ...
+ $ NOC   : chr  "CHN" "CHN" "DEN" "DEN" ...
+ $ Games : chr  "1992 Summer" "2012 Summer" "1920 Summer" "1900 Summer" ...
+ $ City  : chr  "Barcelona" "London" "Antwerpen" "Paris" ...
+ $ Sport : chr  "Basketball" "Judo" "Football" "Tug-Of-War" ...
+ $ Event : chr  "Basketball Men's Basketball" "Judo Men's Extra-Lightweight" "Football Men's Football" "Tug-Of-War Men's Tug-Of-War" ...
+ $ Medal : chr  NA NA NA "Gold" ...</code></pre>
+</div>
 </div>
 <ol start="4" type="1">
 <li>Importez la librairie RSQLite, et ouvrez une connexion à la base de données sqlite en utilisant la fonction dbConnect. Le driver à utiliser sera SQLite(). Quelles sont les tables présentes dans la table ? Vous pourrez utiliser la fonction dbListTables.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">dbname =</span> <span class="st">"data/data.sqlite"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="at">dbname =</span> <span class="st">"~/M1/S2/R avancé/my_blog/data/data.sqlite"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "mtcars"            "olympics_athletes" "tokyo_athletes"   
+[4] "tokyo_medals"      "tokyo_teams"      </code></pre>
+</div>
 </div>
 <ol start="5" type="1">
 <li>Créez deux nouvelles tables dans la base de données à l’aide de la fonction dbWriteTable. Les tables s’appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.</li>
 </ol>
 <p>Je me suis rendu compte que dbWriteTable ne prend que des data.frame en “value”. Donc j’ai fait quelques transformations de class pour pouvoir insérer les 2 tables (je l’ai déjà fait plus haut pour le JSON).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tokyo_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tokyo)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tokyo_df)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con,<span class="st">"tokyo_athletes"</span>, tokyo_df)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con,<span class="st">"olympics_athletes"</span>, olymp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tokyo_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tokyo)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tokyo_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   11085 obs. of  3 variables:
+ $ Name      : chr  "AALERUD Katrine" "ABAD Nestor" "ABAGNALE Giovanni" "ABALDE Alberto" ...
+ $ NOC       : chr  "Norway" "Spain" "Italy" "Spain" ...
+ $ Discipline: chr  "Cycling Road" "Artistic Gymnastics" "Rowing" "Basketball" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comme je l'ai déjà fait je mets les commandes en commentaire</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dbWriteTable(con,"tokyo_athletes", tokyo_df)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dbWriteTable(con,"olympics_athletes", olymp)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="6" type="1">
 <li>Inspectez la table olympics_athletes en utilisant la fonction dbListFields. Quelles sont les colonnes de la table ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(con,<span class="st">"olympics_athletes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(con,<span class="st">"olympics_athletes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ID"     "Name"   "Sex"    "Age"    "Height" "Weight" "Team"   "NOC"   
+ [9] "Games"  "City"   "Sport"  "Event"  "Medal" </code></pre>
+</div>
 </div>
 <ol start="7" type="1">
 <li>Importez cette table depuis la base de données en utilisant la fonction dbReadTable. Convertissez la table en tibble en utilisant la fonction as_tibble.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>olympiii <span class="ot">=</span> <span class="fu">dbReadTable</span>(con,<span class="st">"olympics_athletes"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">=</span> <span class="fu">as_tibble</span>(olympiii)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(olympiii_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>olympiii <span class="ot">=</span> <span class="fu">dbReadTable</span>(con,<span class="st">"olympics_athletes"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">=</span> <span class="fu">as_tibble</span>(olympiii)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(olympiii_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
 </div>
 <ol start="8" type="1">
 <li>Convertissez la colonne Sex en variable catégorielle avec la fonction mutate.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">=</span> olympiii_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sex =</span> <span class="fu">factor</span>(Sex))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(olympiii_tibble<span class="sc">$</span>Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">=</span> olympiii_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sex =</span> <span class="fu">factor</span>(Sex))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(olympiii_tibble<span class="sc">$</span>Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
 </div>
 <ol start="9" type="1">
 <li>Créez deux colonnes à partir de la colonne Games. La première colonne Year sera une colonne de type integer contenant l’année des jeux. La deuxième colonne isSummer sera une colonne booléenne qui indiquera si les jeux sont des jeux d’été ou d’hiver. Vous pourrez utiliser la fonction separate_wider_delim de tidyr notamment. Les questions suivantes nécessitent l’application de plusieurs instructions en séquence. Essayez tant que possible de chaîner les instructions avec des pipes (%&gt;% ou |&gt;).</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(Games,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"isSummer"</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">" "</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">as.integer</span>(Year),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">isSummer =</span> <span class="fu">if_else</span>(isSummer <span class="sc">==</span> <span class="st">"Summer"</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(olympiii_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>olympiii_tibble <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(Games,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"isSummer"</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">" "</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">as.integer</span>(Year),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">isSummer =</span> <span class="fu">if_else</span>(isSummer <span class="sc">==</span> <span class="st">"Summer"</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(olympiii_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [269,731 × 14] (S3: tbl_df/tbl/data.frame)
+ $ ID      : int [1:269731] 1 2 3 4 5 5 5 5 5 5 ...
+ $ Name    : chr [1:269731] "A Dijiang" "A Lamusi" "Gunnar Nielsen Aaby" "Edgar Lindenau Aabye" ...
+ $ Sex     : Factor w/ 2 levels "F","M": 2 2 2 2 1 1 1 1 1 1 ...
+ $ Age     : int [1:269731] 24 23 24 34 21 21 25 25 27 27 ...
+ $ Height  : int [1:269731] 180 170 NA NA 185 185 185 185 185 185 ...
+ $ Weight  : num [1:269731] 80 60 NA NA 82 82 82 82 82 82 ...
+ $ Team    : chr [1:269731] "China" "China" "Denmark" "Denmark/Sweden" ...
+ $ NOC     : chr [1:269731] "CHN" "CHN" "DEN" "DEN" ...
+ $ Year    : int [1:269731] 1992 2012 1920 1900 1988 1988 1992 1992 1994 1994 ...
+ $ isSummer: logi [1:269731] TRUE TRUE TRUE TRUE FALSE FALSE ...
+ $ City    : chr [1:269731] "Barcelona" "London" "Antwerpen" "Paris" ...
+ $ Sport   : chr [1:269731] "Basketball" "Judo" "Football" "Tug-Of-War" ...
+ $ Event   : chr [1:269731] "Basketball Men's Basketball" "Judo Men's Extra-Lightweight" "Football Men's Football" "Tug-Of-War Men's Tug-Of-War" ...
+ $ Medal   : chr [1:269731] NA NA NA "Gold" ...</code></pre>
+</div>
 </div>
 <ol start="10" type="1">
 <li>Calculez la moyenne d’age des athletes pour chacune des éditions des JO d’été. Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?</li>
 </ol>
 <p>Pour les plus jeunes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean_age_by_year <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_age)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mean_age_by_year,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mean_age_by_year <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_age)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mean_age_by_year,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   Year mean_age
+  &lt;int&gt;    &lt;dbl&gt;
+1  1896     23.6</code></pre>
+</div>
 </div>
 <p>Pour les plus vieux :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mean_age_by_year <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_age)) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mean_age_by_year <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_age)) <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   Year mean_age
+  &lt;int&gt;    &lt;dbl&gt;
+1  1932     29.6</code></pre>
+</div>
 </div>
 <ol start="11" type="1">
 <li>Quelle est la discipline des JO d’été dont la taille des athlètes féminines est la plus grande ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>female_athletes <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"F"</span>,isSummer <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Height))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(female_athletes<span class="sc">$</span>Sport,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>female_athletes <span class="ot">&lt;-</span> olympiii_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"F"</span>,isSummer <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Height))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(female_athletes<span class="sc">$</span>Sport,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Basketball"</code></pre>
+</div>
 </div>
 <p>Quelle a été cette discipline au cours de chacune des éditions ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>largest_height_by_year <span class="ot">&lt;-</span> female_athletes <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">1</span>, Height) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Sport, Height, Name)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>largest_height_by_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>largest_height_by_year <span class="ot">&lt;-</span> female_athletes <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">1</span>, Height) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Year, Sport, Height, Name)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>largest_height_by_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 37 × 4
+# Groups:   Year [23]
+    Year Sport      Height Name                                       
+   &lt;int&gt; &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;                                      
+ 1  2000 Basketball    213 "Magorzata Teresa \"Margo\" Dydek (-Twigg)"
+ 2  1976 Basketball    210 "Ujana Semjonova"                          
+ 3  1980 Basketball    210 "Ujana Semjonova"                          
+ 4  2012 Basketball    206 "Wei Wei"                                  
+ 5  1984 Basketball    205 "Chen Yuefang"                             
+ 6  1984 Basketball    205 "Susanna \"Sue\" Geh"                      
+ 7  1988 Basketball    204 "Zheng Haixia"                             
+ 8  1992 Basketball    204 "Zheng Haixia"                             
+ 9  1996 Basketball    204 "Zheng Haixia"                             
+10  2016 Basketball    203 "Elizabeth Folake \"Liz\" Cambage"         
+# ℹ 27 more rows</code></pre>
+</div>
 </div>
 <p>Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>largest_height_by_year <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Sport)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>largest_height_by_year <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Sport)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 3
+# Groups:   Year [23]
+    Year Sport         n
+   &lt;int&gt; &lt;chr&gt;     &lt;int&gt;
+ 1  1920 Diving        1
+ 2  1924 Fencing       1
+ 3  1924 Tennis        1
+ 4  1928 Fencing       1
+ 5  1932 Fencing       1
+ 6  1936 Fencing       1
+ 7  1948 Athletics     3
+ 8  1952 Athletics     3
+ 9  1956 Athletics     1
+10  1960 Swimming      2
+# ℹ 17 more rows</code></pre>
+</div>
 </div>
 <p>Vous disposez du texte suivant :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>texte <span class="ot">=</span> <span class="st">"Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">entier à Paris."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>texte <span class="ot">=</span> <span class="st">"Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="st">ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="st">26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="st">entier à Paris."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="12" type="1">
 <li>En utilisant les fonctions du packages stringr, extrayez les dates des différentes éditions des JO. Aide : définissez une expression régulière capable de capturer une séquence de caractères représentant une date telle que “26 Juillet 2024”. Vous pourrez utiliser cette regex avec la fonction str_extract_all par exemple.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>date <span class="ot">=</span> <span class="fu">str_extract_all</span>(texte, <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d{1,2}</span><span class="sc">\\</span><span class="st">s(?:Janvier|Février|Mars|Avril|Mai|Juin|Juillet|Août|Septembre|Octobre|Novembre|Décembre)</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">b"</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'stringr' a été compilé avec la version R 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>date <span class="ot">=</span> <span class="fu">str_extract_all</span>(texte, <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d{1,2}</span><span class="sc">\\</span><span class="st">s(?:Janvier|Février|Mars|Avril|Mai|Juin|Juillet|Août|Septembre|Octobre|Novembre|Décembre)</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">b"</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "5 Août 2016"     "20 Août 2016"    "23 Juillet 2021" "8 Août 2021"    
+[5] "26 Juillet 2024" "11 Août 2024"   </code></pre>
+</div>
 </div>
 <ol start="13" type="1">
 <li>Remplacez les noms des mois par leur numéro pour rendre ces éléments convertibles en date en utilisant la fonction str_replace.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>texte_avant_date <span class="ot">=</span> <span class="fu">str_replace_all</span>(date[[<span class="dv">1</span>]],</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Juillet"</span> <span class="ot">=</span> <span class="st">"07"</span>, <span class="st">"Août"</span> <span class="ot">=</span> <span class="st">"08"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>texte_avant_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>texte_avant_date <span class="ot">=</span> <span class="fu">str_replace_all</span>(date[[<span class="dv">1</span>]],</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Juillet"</span> <span class="ot">=</span> <span class="st">"07"</span>, <span class="st">"Août"</span> <span class="ot">=</span> <span class="st">"08"</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>texte_avant_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5 08 2016"  "20 08 2016" "23 07 2021" "8 08 2021"  "26 07 2024"
+[6] "11 08 2024"</code></pre>
+</div>
 </div>
 <ol start="14" type="1">
 <li>Convertissez ces 3 éléments en date en utilisant la fonction appropriée du package lubridate.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>texte_modifie <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">b(</span><span class="sc">\\</span><span class="st">d{1,2}) (</span><span class="sc">\\</span><span class="st">d{2}) (</span><span class="sc">\\</span><span class="st">d{4})</span><span class="sc">\\</span><span class="st">b"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1-</span><span class="sc">\\</span><span class="st">2-</span><span class="sc">\\</span><span class="st">3"</span>, texte_avant_date)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>date_final <span class="ot">=</span> <span class="fu">dmy</span>(texte_modifie)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(date_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : 'lubridate'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>L'objet suivant est masqué depuis 'package:arrow':
+
+    duration</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis 'package:base':
+
+    date, intersect, setdiff, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>texte_modifie <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">b(</span><span class="sc">\\</span><span class="st">d{1,2}) (</span><span class="sc">\\</span><span class="st">d{2}) (</span><span class="sc">\\</span><span class="st">d{4})</span><span class="sc">\\</span><span class="st">b"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1-</span><span class="sc">\\</span><span class="st">2-</span><span class="sc">\\</span><span class="st">3"</span>, texte_avant_date)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>date_final <span class="ot">=</span> <span class="fu">dmy</span>(texte_modifie)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(date_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
 </div>
 <ol start="15" type="1">
 <li>Combien de jours ont séparés les éditions de Rio et Tokyo ? Et sépareront les éditions de Tokyo et de Paris ? Faites le même calcul en semaines.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Rio_Tokyo <span class="ot">=</span> <span class="fu">interval</span>(<span class="at">start =</span> <span class="st">"2016-08-20"</span>, <span class="at">end =</span> <span class="st">"2021-07-23"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Rio_Tokyo, <span class="st">"days"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Rio_Tokyo, <span class="st">"week"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>Rio_Tokyo <span class="ot">=</span> <span class="fu">interval</span>(<span class="at">start =</span> <span class="st">"2016-08-20"</span>, <span class="at">end =</span> <span class="st">"2021-07-23"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Rio_Tokyo, <span class="st">"days"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1798</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Rio_Tokyo, <span class="st">"week"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 256.8571</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Tokyo_Paris <span class="ot">=</span> <span class="fu">interval</span>(<span class="at">start =</span> <span class="st">"2021-08-08"</span>, <span class="at">end =</span> <span class="st">"2024-07-26"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Tokyo_Paris, <span class="st">"days"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Tokyo_Paris, <span class="st">"week"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>Tokyo_Paris <span class="ot">=</span> <span class="fu">interval</span>(<span class="at">start =</span> <span class="st">"2021-08-08"</span>, <span class="at">end =</span> <span class="st">"2024-07-26"</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Tokyo_Paris, <span class="st">"days"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1083</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(Tokyo_Paris, <span class="st">"week"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 154.7143</code></pre>
+</div>
 </div>
 
 

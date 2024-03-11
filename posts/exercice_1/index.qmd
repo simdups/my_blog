@@ -3,13 +3,12 @@ title: "Exercice 1"
 author: "Simon Dupas-Brousse"
 date: "2024-02-27"
 categories: [news, code, analysis]
-eval: false
 ---
 
 importation :
 
 ```{r}
-path = ("data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv")
+path = ("~/M1/S2/R avancé/my_blog/data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv")
 data_ex = read.table(path, header = TRUE, sep = ";", quote = "\"")
 ```
 

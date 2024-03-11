@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Simon Dupas-Brousse">
-<meta name="dcterms.date" content="2024-03-03">
+<meta name="dcterms.date" content="2024-02-27">
 
 <title>my_blog - Exercice 1</title>
 <style>
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 3, 2024</p>
+        <p class="date">February 27, 2024</p>
       </div>
     </div>
     
@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>importation :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> (<span class="st">"data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> (<span class="st">"~/M1/S2/R avancé/my_blog/data/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">=</span> <span class="fu">read.table</span>(path, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
@@ -196,20 +196,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   31 obs. of  4 variables:
+ $ geo_point                     : chr  "48.841319, 2.253076" "48.924388, 2.359871" "48.751095, 2.0759" "48.788046, 2.034987" ...
+ $ nom                           : chr  "Parc des Princes" "Stade de France" "Golf national" "Vélodrome National de Saint-Quentin-en-Yvelines" ...
+ $ sites_olympiques_paralympiques: chr  "Site olympique" "Site olympique,Site paralympique" "Site olympique" "Site olympique,Site paralympique" ...
+ $ sports                        : chr  "Football" "Athlétisme,Para athlétisme,Rugby" "Golf" "Cyclisme sur piste,Para cyclisme sur piste" ...</code></pre>
+</div>
 </div>
 <p>31 obs</p>
 <ol start="3" type="1">
 <li>Combien y a t’il de sites olympiques ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"Site olympique"</span>, data_ex<span class="sc">$</span>sites_olympiques_paralympiques, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"Site olympique"</span>, data_ex<span class="sc">$</span>sites_olympiques_paralympiques, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
 </div>
 <p>26 olympiques</p>
 <ol start="4" type="1">
 <li>Combien y a t’il de sites paralympiques ?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"Site paralympique"</span>, data_ex<span class="sc">$</span>sites_olympiques_paralympiques, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"Site paralympique"</span>, data_ex<span class="sc">$</span>sites_olympiques_paralympiques, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19</code></pre>
+</div>
 </div>
 <p>19 paralympiques</p>
 <ol start="5" type="1">
@@ -217,9 +230,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>j’ai juste compté les lignes qui présentent au moins une virgule dans la colonne “sports” :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sites_multisports <span class="ot">=</span> <span class="fu">subset</span>(data_ex, <span class="fu">str_count</span>(sports, <span class="st">","</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sites_multisports<span class="sc">$</span>nom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'stringr' a été compilé avec la version R 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sites_multisports <span class="ot">=</span> <span class="fu">subset</span>(data_ex, <span class="fu">str_count</span>(sports, <span class="st">","</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sites_multisports<span class="sc">$</span>nom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Stade de France"                                
+ [2] "Vélodrome National de Saint-Quentin-en-Yvelines"
+ [3] "Stade Roland Garros"                            
+ [4] "Arena Paris Sud 4 (Porte de Versailles)"        
+ [5] "Pont d'Iéna"                                    
+ [6] "Arena Bercy"                                    
+ [7] "Arena Paris nord"                               
+ [8] "Arena Paris Sud 6 (Porte de Versailles)"        
+ [9] "Stade de la Concorde"                           
+[10] "Arena Champs de Mars"                           
+[11] "La Défense Arena"                               
+[12] "Stade nautique"                                 
+[13] "Arena Paris Sud 1 (Porte de Versailles)"        
+[14] "Stade Tour Eiffel"                              
+[15] "Arena La Chapelle"                              
+[16] "Centre aquatique"                               
+[17] "Château de Versailles"                          
+[18] "Grand Palais"                                   
+[19] "Invalides"                                      </code></pre>
+</div>
 </div>
 <ol start="6" type="1">
 <li>Quels sont les disciplines para-olympiques accueillies dans ces sites franciliens ?</li>
@@ -229,114 +266,155 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>On obtient ça : Basket fauteuil, <strong>boccia</strong>, <strong>cécifoot</strong>, escrime fauteuil goalball, para athlétisme, para aviron, para badminton, para canoë, para cyclisme sur route, para cyclisme sur piste, para équitation (dressage), para haltérophilie, para judo, para natation, para taekwondo, para tennis de table, para tir à l’arc, para tir sportif, para triathlon, rugby fauteuil, tennis fauteuil, volleyball assis</p>
 <p>Pour que ça soit plus léger dans le code j’ai utilisé des mots clés tels que para, fauteuil ou assis. Puis j’ai écris les derniers en entier (ceux surlignés).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sites_para_olympiques <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  sites_multisports,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">"fauteuil|Para|assis|Goalball|Cécifoot"</span>, sports, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sites_para_olympiques <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  sites_multisports,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">"fauteuil|Para|assis|Goalball|Cécifoot"</span>, sports, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="7" type="1">
 <li>Quel(s) site(s) accueille(nt) le plus de disciplines différentes ?</li>
 </ol>
 <p>Comme dans chaque site les disciplines sont tout le temps différentes, on peut se contenter de compter le(s) site(s) avec le plus de virgules. (ou alors j’ai mal compris la question)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nb_disciplines <span class="ot">&lt;-</span> <span class="fu">str_count</span>(data_ex<span class="sc">$</span>sports, <span class="st">","</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># nombre de virgule maximum dans un site</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>max_nb_virgules <span class="ot">&lt;-</span> <span class="fu">max</span>(nb_disciplines)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les sites avec l'indice maximum de virgules</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>indices_max <span class="ot">&lt;-</span> <span class="fu">which</span>(nb_disciplines <span class="sc">==</span> max_nb_virgules)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage de leur nom</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[indices_max]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nb_disciplines <span class="ot">&lt;-</span> <span class="fu">str_count</span>(data_ex<span class="sc">$</span>sports, <span class="st">","</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># nombre de virgule maximum dans un site</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>max_nb_virgules <span class="ot">&lt;-</span> <span class="fu">max</span>(nb_disciplines)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tous les sites avec l'indice maximum de virgules</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>indices_max <span class="ot">&lt;-</span> <span class="fu">which</span>(nb_disciplines <span class="sc">==</span> max_nb_virgules)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage de leur nom</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[indices_max]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Arena Bercy"          "Arena Paris nord"     "Stade de la Concorde"
+[4] "Arena Champs de Mars" "Stade nautique"       "Arena La Chapelle"   
+[7] "Grand Palais"         "Invalides"           </code></pre>
+</div>
 </div>
 <ol start="8" type="1">
 <li>Quelle discipline aura lieu sur le plus grand nombre de sites ? Quels sont ces sites ?</li>
 </ol>
 <p>Dans un premier temps, il faut découper correctement les disciplines pour ensuite les compter :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sports_separes <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(data_ex<span class="sc">$</span>sports, <span class="st">","</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>comptage_disciplines <span class="ot">&lt;-</span> <span class="fu">table</span>(sports_separes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sports_separes <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(data_ex<span class="sc">$</span>sports, <span class="st">","</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>comptage_disciplines <span class="ot">&lt;-</span> <span class="fu">table</span>(sports_separes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Maintenant, on peut identifier la ou les discipline(s) apparue(s) un maximum :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>indices2_max <span class="ot">&lt;-</span> <span class="fu">which</span>(comptage_disciplines <span class="sc">==</span> <span class="fu">max</span>(comptage_disciplines))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(comptage_disciplines[indices2_max])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>indices2_max <span class="ot">&lt;-</span> <span class="fu">which</span>(comptage_disciplines <span class="sc">==</span> <span class="fu">max</span>(comptage_disciplines))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(comptage_disciplines[indices2_max])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Athlétisme"</code></pre>
+</div>
 </div>
 <p>Pour finir, on affiche les noms des sites qui présentent la discipline “Athlétisme” :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sites_athletisme <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Athlétisme"</span>, data_ex<span class="sc">$</span>sports)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[sites_athletisme]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sites_athletisme <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Athlétisme"</span>, data_ex<span class="sc">$</span>sports)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[sites_athletisme]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stade de France"         "Hôtel de ville de Paris"
+[3] "Pont d'Iéna"             "Invalides"              </code></pre>
+</div>
 </div>
 <ol start="9" type="1">
 <li>A vol d’oiseau, quels sont les sites les deux sites les plus proches ?</li>
 </ol>
 <p>Dans un premier temps, il faut que les coordonnées soient fournies sous forme de vecteur numérique avec deux éléments (la latitude et la longitude) pour que distHaversine fonctionne. Petit exemple avec les 2 premières lignes du dataset :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geosphere)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>exemple <span class="ot">=</span> data_ex<span class="sc">$</span>geo_point[[<span class="dv">1</span>]]</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">=</span> data_ex<span class="sc">$</span>geo_point[[<span class="dv">2</span>]]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>la <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(exemple, <span class="st">","</span>)))</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>la2 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(ex2, <span class="st">","</span>)))</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">distHaversine</span>(la, la2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geosphere)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>exemple <span class="ot">=</span> data_ex<span class="sc">$</span>geo_point[[<span class="dv">1</span>]]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">=</span> data_ex<span class="sc">$</span>geo_point[[<span class="dv">2</span>]]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>la <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(exemple, <span class="st">","</span>)))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>la2 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(<span class="fu">strsplit</span>(ex2, <span class="st">","</span>)))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">distHaversine</span>(la, la2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15056.74</code></pre>
+</div>
 </div>
 <p>On va se faire une petite fonction qui fait ça pour nous quand on rentre juste data_ex$geo_point[[1]] (par exemple) en paramètre :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>distance_entre_points <span class="ot">&lt;-</span> <span class="cf">function</span>(coord1, coord2) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  coord1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(coord1, <span class="st">","</span>)[[<span class="dv">1</span>]])</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  coord2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(coord2, <span class="st">","</span>)[[<span class="dv">1</span>]])</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distHaversine</span>(coord1, coord2)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># exemple d'utilisation :</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">3</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>distance_entre_points <span class="ot">&lt;-</span> <span class="cf">function</span>(coord1, coord2) {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  coord1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(coord1, <span class="st">","</span>)[[<span class="dv">1</span>]])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  coord2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(coord2, <span class="st">","</span>)[[<span class="dv">1</span>]])</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distHaversine</span>(coord1, coord2)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># exemple d'utilisation :</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">3</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6135.202</code></pre>
+</div>
 </div>
 <p>Maintenant l’idée c’est de calculer automatiquement le distance entre tous les sites du dataset à l’aide d’une boucle. On stocke les résultats de cette boucle dans une matrice “distances” :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">nrow</span>(data_ex), <span class="at">ncol =</span> <span class="fu">nrow</span>(data_ex))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_ex)) {</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_ex)) {</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    distances[i, j] <span class="ot">&lt;-</span> <span class="fu">distance_entre_points</span>(data_ex[i, <span class="st">"geo_point"</span>], data_ex[j, <span class="st">"geo_point"</span>])</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># On fait juste gaffe à virer les distances d'un site à lui même</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(distances) <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">nrow</span>(data_ex), <span class="at">ncol =</span> <span class="fu">nrow</span>(data_ex))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_ex)) {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(data_ex)) {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    distances[i, j] <span class="ot">&lt;-</span> <span class="fu">distance_entre_points</span>(data_ex[i, <span class="st">"geo_point"</span>], data_ex[j, <span class="st">"geo_point"</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># On fait juste gaffe à virer les distances d'un site à lui même</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(distances) <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Maintenant on peut répondre à la question :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dist_min <span class="ot">&lt;-</span> <span class="fu">which</span>(distances <span class="sc">==</span> <span class="fu">min</span>(distances, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[dist_min[,<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dist_min <span class="ot">&lt;-</span> <span class="fu">which</span>(distances <span class="sc">==</span> <span class="fu">min</span>(distances, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[dist_min[,<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stade BMX de Saint-Quentin-en-Yvelines"         
+[2] "Vélodrome National de Saint-Quentin-en-Yvelines"</code></pre>
+</div>
 </div>
 <p>bonus si on veut savoir la distance :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on cherche la ligne des 2 sites :</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Stade BMX de Saint-Quentin-en-Yvelines"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Vélodrome National de Saint-Quentin-en-Yvelines"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on utilise notre fonction :</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">20</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on cherche la ligne des 2 sites :</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Stade BMX de Saint-Quentin-en-Yvelines"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Vélodrome National de Saint-Quentin-en-Yvelines"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on utilise notre fonction :</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">20</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">4</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 91.69166</code></pre>
+</div>
 </div>
 <ol start="10" type="1">
 <li>Quels sont les deux sites les plus éloignés ?</li>
 </ol>
 <p>Plus qu’à faire l’inverse d’avant :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dist_max <span class="ot">&lt;-</span> <span class="fu">which</span>(distances <span class="sc">==</span> <span class="fu">max</span>(distances, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[dist_max[,<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dist_max <span class="ot">&lt;-</span> <span class="fu">which</span>(distances <span class="sc">==</span> <span class="fu">max</span>(distances, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>data_ex<span class="sc">$</span>nom[dist_max[,<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Colline d'Elancourt" "Stade nautique"     </code></pre>
+</div>
 </div>
 <p>bonus si on veut savoir la distance :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on cherche la ligne des 2 sites :</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Colline d'Elancourt"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Stade nautique"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on utilise notre fonction :</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">28</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">17</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on cherche la ligne des 2 sites :</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Colline d'Elancourt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(data_ex<span class="sc">$</span>nom <span class="sc">==</span> <span class="st">"Stade nautique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on utilise notre fonction :</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">distance_entre_points</span>(data_ex<span class="sc">$</span>geo_point[[<span class="dv">28</span>]],data_ex<span class="sc">$</span>geo_point[[<span class="dv">17</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 74882.55</code></pre>
+</div>
 </div>
 <ol start="11" type="1">
 <li>Vous êtes un heureux millionaire et souhaitez investir dans un bien immobilier. Vous décidez d’acheter un appartement situé au barycentre de l’ensemble des sites olympiques. Où se situe cet appartement ?</li>
@@ -345,28 +423,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En pratique, cela signifie que nous additionnons toutes les latitudes et toutes les longitudes de tous les sites, puis nous divisons par le nombre total de sites pour trouver les coordonnées moyennes, qui représentent le barycentre de tous les sites.</p>
 <p>ok ça part :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on fait une matrice avec les coord exploitables</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>coordonnees <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data_ex<span class="sc">$</span>geo_point, <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(x, <span class="st">","</span>)[[<span class="dv">1</span>]]))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># puis on fait la moyenne de lat et long de cette matrice :</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(coordonnees[<span class="dv">1</span>, ]), <span class="fu">mean</span>(coordonnees[<span class="dv">2</span>, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on fait une matrice avec les coord exploitables</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>coordonnees <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data_ex<span class="sc">$</span>geo_point, <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">strsplit</span>(x, <span class="st">","</span>)[[<span class="dv">1</span>]]))</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># puis on fait la moyenne de lat et long de cette matrice :</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(coordonnees[<span class="dv">1</span>, ]), <span class="fu">mean</span>(coordonnees[<span class="dv">2</span>, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48.86684  2.29757</code></pre>
+</div>
 </div>
 <p>Maintenant on va utiliser reverse_geocode pour identifier le nom d’une adresse à partir d’une localisation :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygeocoder)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">c</span>(<span class="fl">48.8668</span>),</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">c</span>(<span class="fl">2.29757</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reverse_geocode</span>(</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> latitude,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">long =</span> longitude,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">'osm'</span>,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_results =</span> <span class="cn">TRUE</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(address)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygeocoder)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">c</span>(<span class="fl">48.8668</span>),</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">c</span>(<span class="fl">2.29757</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reverse_geocode</span>(</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> latitude,</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">long =</span> longitude,</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">'osm'</span>,</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_results =</span> <span class="cn">TRUE</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(address)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Passing 1 coordinate to the Nominatim single coordinate geocoder</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Query completed in: 1 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  address                                                                       
+  &lt;chr&gt;                                                                         
+1 23, Avenue Pierre 1er de Serbie, Quartier de Chaillot, Paris 16e Arrondisseme…</code></pre>
+</div>
 </div>
 <p>j’ai clairement copié collé l’exemple mais bon ça fonctionne. Voilà l’appart du prochain millionaire : 23, Avenue Pierre 1er de Serbie, Quartier de Chaillot, Paris 16e Arrondissement</p>
 <p>à côté de la tour eiffel sympa.</p>
